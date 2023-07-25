@@ -58,6 +58,20 @@ void Bureaucrat::lowgrading()
         this->_grade++;
 }
 
+void Bureaucrat::signForm(Form &f)
+{
+    try
+    {
+        f.beSigned(*this);
+        std::cout << this->_name << " signed form [" << f.getName() << "]" << std::endl;
+    }
+    catch (Form::GradeTooLowException &e)
+    {
+        std::cout << this->_name << " couldn't sign form [";
+        std::cout << f.getName() << "] because " << e.what() << std::endl;
+    }
+}
+
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
     return ("Grade too high exception");

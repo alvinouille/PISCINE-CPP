@@ -1,5 +1,5 @@
-NAME	= AMateria
-SRC		= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+NAME	= Materia
+SRC		= main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 OBJ		= $(SRC:.cpp=.o)
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
@@ -12,7 +12,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 %.o : %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -g3 -c $< -o $@
 	
 clean:
 	$(RM) $(OBJ)

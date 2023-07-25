@@ -1,16 +1,7 @@
 #ifndef MATERIASOURCE_H
 # define MATERIASOURCE_H
 
-#include <string>
-#include <iostream>
-
-class IMateriaSource
-{
-    public:
-        virtual ~IMateriaSource() {}
-        virtual void learnMateria(AMateria*) = 0;
-        virtual AMateria* createMateria(std::string const & type) = 0;
-};
+#include "IMateriaSource.hpp"
 
 class MateriaSource : public IMateriaSource
 {
@@ -23,8 +14,8 @@ class MateriaSource : public IMateriaSource
         MateriaSource &operator=(MateriaSource const &rhs);
         ~MateriaSource();
 
-        void learnMateria(AMateria *mat) override;
-        AMateria* createMateria(std::string const &type) override;
+        void learnMateria(AMateria *mat);
+        AMateria* createMateria(std::string const &type);
 };
 
 #endif

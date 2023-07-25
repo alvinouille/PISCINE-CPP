@@ -65,6 +65,7 @@ void Character::equip(AMateria* m)
         if (!this->_inventory[i])
         {
             this->_inventory[i] = m;
+            std::cout << "Now equiped with " << m->getType() << std::endl;
             return ;
         }
     }
@@ -74,6 +75,7 @@ void Character::unequip(int idx)
 {
     if (idx >= 0 && idx < 4 && this->_inventory[idx])
     {
+        std::cout << "Now unequiped with " << this->_inventory[idx]->getType() << std::endl;
         delete this->_inventory[idx]; //NON enregistrer adresse dans tab dynamique <vector> de AMat
         this->_inventory[idx] = NULL;
     }
@@ -82,5 +84,8 @@ void Character::unequip(int idx)
 void Character::use(int idx, ICharacter& target)
 {
     if (idx >= 0 && idx < 4 && this->_inventory[idx])
+    {
+        std::cout << "Using : ";
         this->_inventory[idx]->use(target);
+    }
 }

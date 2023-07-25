@@ -45,28 +45,24 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &rhs)
     return (*this);
 }
 
-std::string const &MateriaSource::getName() const
-{
-    return (this->_name);
-}
-
 void MateriaSource::learnMateria(AMateria *mat)
 {
     for (int i = 0 ; i < 4 ; i++)
     {
         if (!this->_repertory[i])
         {
-            this->_repertory[i] = new AMateria(*mat);
+            this->_repertory[i] = mat;
             return ;
         }
     }
 }
 
-void MateriaSource::createMateria(std:string const &type)
+AMateria *MateriaSource::createMateria(std::string const &type)
 {
     for (int i = 0 ; i < 4 ; i++)
     {
-        if (this->_repertory[i].type == type)
-            return (new AMateria(this->_repertory[i]));
+        if (this->_repertory[i] && this->_repertory[i]->getType() == type)
+            return (this->_repertory[i]->clone());
     }
+    return (NULL);
 }

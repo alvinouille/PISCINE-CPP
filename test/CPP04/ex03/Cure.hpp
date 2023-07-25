@@ -13,6 +13,6 @@ class Cure : public AMateria
         
         Cure *clone()const override;
         void use(ICharacter &target)override;
-}
+};
 
 #endif

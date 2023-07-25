@@ -1,3 +1,6 @@
+#ifndef CHARACTER_H
+# define CHARACTER_H
+
 #include <string>
 #include <iostream>
 
@@ -16,7 +19,7 @@ class Character : public ICharacter
     private:
         std::string _name;
         AMateria *_inventory[4];
-        int _index;
+
     public:
         Character();
         Character(std::string const name);
@@ -28,4 +31,6 @@ class Character : public ICharacter
         void equip(AMateria* m) override;
         void unequip(int idx) override;
         void use(int idx, ICharacter& target) override;
-}
+};
+
+#endif

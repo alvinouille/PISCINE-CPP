@@ -1,14 +1,17 @@
 #include "Character.hpp"
 
-Character::Character() : ICharacter(), index(0)
+Character::Character() : ICharacter(), _name("")
 {
+    for (int i = 0 ; i < 4 ; i++)
+        this->_inventory[i] = NULL;
     std::cout << "Default constructor of Character" << std::endl;
 }
 
-Character::Character(std::string const name) : ICharacter(), _name(name), _index(0)
+Character::Character(std::string const name) : ICharacter(), _name(name)
 {
+    for (int i = 0 ; i < 4 ; i++)
+        this->_inventory[i] = NULL;
     std::cout << "Parametric constructor of Character" << std::endl;
-    Character::_index++;
 }
 
 Character::Character(Character const &copy) : ICharacter(copy)
@@ -20,8 +23,11 @@ Character::Character(Character const &copy) : ICharacter(copy)
 Character::~Character() 
 {
     std::cout << "Destructor of Character" << std::endl;
-    for (int i = 0 ; i < _index ; i++)
-        delete this->_inventory[i];
+    for (int i = 0 ; i < 4 ; i++)
+    {
+        if (this->_inventory[i])
+            delete this->_inventory[i];
+    }
 }
 
 Character &Character::operator=(Character const &rhs)
@@ -30,12 +36,20 @@ Character &Character::operator=(Character const &rhs)
     if (this == &rhs)
         return (*this);
     ICharacter::operator=(rhs);
-    for (int i = 0 ; i < _index ; i++)
-        delete this->_inventory[i];
-    for (int i = 0 ; i < rhs._index ; i++)
-        this->_inventory[i] = rhs._inventory[i];
+    for (int i = 0 ; i < 4 ; i++)
+    {
+        if (this->_inventory[i])
+        {
+            delete this->_inventory[i];
+            this->_inventory[i] = NULL;
+        }
+    }
+    for (int i = 0 ; i < 4 ; i++)
+    {
+        if (rhs._inventory[i])
+            this->_inventory[i] = rhs._inventory[i];
+    }
     this->_name = rhs._name;
-    this->_index = rhs._index;
     return (*this);
 }
 
@@ -46,19 +60,22 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria* m)
 {
-    if (this->_index != 4)
-        this->_inventory[_index] = new AMateria(*m);
-    if (this->_index != 4)
-        (this->_index)++;
+    for (int i = 0 ; i < 4 ; i++)
+    {
+        if (!this->_inventory[i])
+        {
+            this->_inventory[i] = m;
+            return ;
+        }
+    }
 }
 
 void Character::unequip(int idx)
 {
-    //enregistrer adresse dans tab dynamique <vector> de AMat
     if (idx >= 0 && idx < 4 && this->_inventory[idx])
     {
+        delete this->_inventory[idx]; //NON enregistrer adresse dans tab dynamique <vector> de AMat
         this->_inventory[idx] = NULL;
-        this->_index = idx;
     }
 }
 

@@ -75,6 +75,7 @@ int main()
         middle.signForm(form1);
         middle.executeForm(form1);
         std::cout << form1;
+        boss.signForm(form1);
         boss.executeForm(form1);
     }
 
@@ -90,9 +91,8 @@ int main()
         idiot.signForm(form2);
         idiot.executeForm(form2);
         std::cout << form2;
+        boss.executeForm(form2);
         middle.signForm(form2);
-        middle.executeForm(form2);
-        std::cout << form2;
         boss.executeForm(form2);
     }
 

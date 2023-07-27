@@ -1,11 +1,11 @@
 #include "ScalarConverter.hpp"
 
-int main()
+int main(int ac, char **av)
 {
     ScalarConverter scal;
 
-    scal.convert("a");
-    scal.convert("42");
-    scal.convert("0.042f");
-    scal.convert("0.02536521");
+    if (ac != 2)
+        return (1);
+    std::string str = av[1];
+    scal.convert(str);
 }

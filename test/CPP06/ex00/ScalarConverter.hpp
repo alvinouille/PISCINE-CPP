@@ -6,9 +6,6 @@
 #include <limits>
 #include <sstream>
 
-# define F 0
-# define D 1
-
 class ScalarConverter
 {
     public:

@@ -37,24 +37,27 @@ void Harl::error(void)const
 void Harl::complain(std::string level)
 {
     std::string lvl[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-    int pos = -1;
+    int pos = 5;
 
-    for (int i = 0 ; i < 4 ; i++)
+    if (!level.empty())
     {
-        if (lvl[i] == level)
-            pos = i;
+        for (int i = 0 ; i < 4 ; i++)
+        {
+            if (lvl[i] == level)
+                pos = i;
+        }
     }
     switch(pos)
     {
         case 0:
             this->debug();
-            break;
+            break; //to remove to make it work as asked, but -Werror to remove in makefile too
         case 1:
             this->info();
-            break;
+            break; //to remove to make it work as asked, but -Werror to remove in makefile too
         case 2:
             this->warning();
-            break;
+            break; //to remove to make it work as asked, but -Werror to remove in makefile too
         case 3:
             this->error();
             break;

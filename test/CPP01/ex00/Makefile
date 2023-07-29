@@ -1,5 +1,5 @@
 NAME	= brainz
-SRC		= Zombie.cpp main.cpp
+SRC		= Zombie.cpp main.cpp newZombie.cpp randomChump.cpp
 OBJ		= $(SRC:.cpp=.o)
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98

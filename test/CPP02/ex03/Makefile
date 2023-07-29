@@ -1,4 +1,4 @@
-NAME	= fixed
+NAME	= BSP
 SRC		= main.cpp bsp.cpp Fixed.cpp Point.cpp
 OBJ		= $(SRC:.cpp=.o)
 CC		= c++

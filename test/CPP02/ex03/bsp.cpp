@@ -13,7 +13,6 @@ static const Fixed triangleArea(Point const a, Point const b, Point const c)
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
-    (void)point;
     Fixed triangleAll(triangleArea(a, b, c));
     Fixed triangleP1(triangleArea(a, b, point));
     Fixed triangleP2(triangleArea(a, c, point));

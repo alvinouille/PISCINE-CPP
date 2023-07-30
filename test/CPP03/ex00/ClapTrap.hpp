@@ -31,6 +31,4 @@ class ClapTrap
         void beRepaired(unsigned int amount);
 };
 
-std::ostream &operator<<(std::ostream &o, ClapTrap const &c);
-
 #endif

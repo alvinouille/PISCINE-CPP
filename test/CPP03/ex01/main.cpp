@@ -11,16 +11,4 @@ int main()
     mob1.guardGate();
     mob1.attack(mob2.getName());
     mob2.takeDamage(mob1.getAttackDamage());
-    mob1.attack(mob2.getName());
-    mob2.takeDamage(mob1.getAttackDamage());
-    mob1.attack(mob2.getName());
-    mob2.takeDamage(mob1.getAttackDamage());
-    mob1.attack(mob2.getName());
-    mob2.takeDamage(mob1.getAttackDamage());
-    mob1.attack(mob2.getName());
-    mob2.takeDamage(mob1.getAttackDamage());
-    mob1.attack(mob2.getName());
-    mob2.takeDamage(mob1.getAttackDamage());
-    mob1.attack(mob2.getName());
-    mob2.takeDamage(mob1.getAttackDamage());
 }

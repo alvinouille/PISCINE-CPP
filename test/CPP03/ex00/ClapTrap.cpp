@@ -89,12 +89,3 @@ void ClapTrap::beRepaired(unsigned int amount)
     std::cout << cyan << "ClapTrap " << this->_name << " repaired himself of ";
     std::cout << amount << " points, he now has " << this->_hitPoints << " hit points" << reset << std::endl; 
 }
-
-std::ostream &operator<<(std::ostream &o, ClapTrap const &c)
-{
-    o << std::endl << c.getName() << " : " << std::endl;
-    o << "     hit points = " << c.getHitPoints() << std::endl;
-    o << "     energy points = " << c.getEnergyPoints() << std::endl;
-    o << "     damage of his attacks = " << c.getAttackDamage() << std::endl;
-    return (o);
-}

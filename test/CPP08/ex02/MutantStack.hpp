@@ -21,7 +21,10 @@ class MutantStack : public std::stack<T>
         typedef typename std::deque<T>::iterator iterator;
         iterator begin()
         {
-
+            iterator = &(this->top());
+            int len = &(this->size());
+            for (int i = 1; i < len ; i++)
+                
         }
         iterator end()
         {

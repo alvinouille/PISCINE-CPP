@@ -18,9 +18,9 @@ int main()
 
     std::cout << std::endl << std::endl << "- - - DEEP COPY TESTS WITH CAT AND CATCOPY - - -" << std::endl << std::endl;
     
-    // Cat *catCopy = new Cat(*cat); // it's the same
-    Cat *catCopy = new Cat();
-    *catCopy = *cat;
+    Cat *catCopy = new Cat(*cat); // it's the same
+    // Cat *catCopy = new Cat();
+    // *catCopy = *cat;
 
     std::cout << std::endl << "New copy of cat, catCopy, look how they are the same :" << std::endl;
 

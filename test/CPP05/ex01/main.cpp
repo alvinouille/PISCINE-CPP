@@ -8,11 +8,7 @@ int main()
         Bureaucrat worst("worst", 151);
         std::cout << worst;
     }
-    catch (Bureaucrat::GradeTooHighException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    catch (Bureaucrat::GradeTooLowException &e)
+    catch (std::exception &e)
     {
         std::cout << e.what() << std::endl;
     }
@@ -29,11 +25,7 @@ int main()
         boss.upgrading();
         std::cout << boss;
     }
-    catch (Bureaucrat::GradeTooHighException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    catch (Bureaucrat::GradeTooLowException &e)
+    catch (std::exception &e)
     {
         std::cout << e.what() << std::endl;
     }
@@ -45,11 +37,7 @@ int main()
         Form form("26B", 1, 151);
         std::cout << form;
     }
-    catch(Form::GradeTooHighException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    catch(Form::GradeTooLowException &e)
+    catch(std::exception &e)
     {
         std::cout << e.what() << std::endl;
     }

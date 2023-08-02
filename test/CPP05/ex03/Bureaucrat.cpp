@@ -52,7 +52,7 @@ void Bureaucrat::upgrading()
 void Bureaucrat::lowgrading()
 {
     std::cout << this->_name << " lowgrading..." << std::endl;
-    if (this->_grade - 1 > 150)
+    if (this->_grade + 1 > 150)
         throw Bureaucrat::GradeTooLowException();
     else
         this->_grade++;
@@ -65,15 +65,10 @@ void Bureaucrat::signForm(AForm &f)
         f.beSigned(*this);
         std::cout << this->_name << " signed form [" << f.getName() << "]" << std::endl;
     }
-    catch (AForm::GradeTooLowException &e)
+    catch (std::exception &e)
     {
         std::cout << this->_name << " couldn't sign form [";
         std::cout << f.getName() << "] because " << e.what() << std::endl;
-    }
-    catch (AForm::AlreadySignedException &a)
-    {
-        std::cout << this->_name << " couldn't sign form [";
-        std::cout << f.getName() << "] because " << a.what() << std::endl;
     }
 }
 
@@ -84,15 +79,10 @@ void Bureaucrat::executeForm(AForm const &form)
         form.execute(*this);
         std::cout << this->_name << " executed form [" << form.getName() << "]" << std::endl;
     }
-    catch (AForm::GradeTooLowException &e)
+    catch (std::exception &e)
     {
         std::cout << this->_name << " couldn't execute form [";
         std::cout << form.getName() << "] because " << e.what() << std::endl;
-    }
-    catch (AForm::NotSignedException &a)
-    {
-        std::cout << this->_name << " couldn't execute form [";
-        std::cout << form.getName() << "] because " << a.what() << std::endl;
     }
 }
 

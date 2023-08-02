@@ -1,22 +1,26 @@
 #include "Character.hpp"
 
+const std::string cyan("\033[1;36m");
+const std::string reset("\033[0m");
+const std::string red("\033[0;31m");
+
 Character::Character() : ICharacter(), _name("")
 {
     for (int i = 0 ; i < 4 ; i++)
         this->_inventory[i] = NULL;
-    std::cout << "Default constructor of Character" << std::endl;
+    std::cout << cyan << "Default constructor of Character" << reset << std::endl;
 }
 
 Character::Character(std::string const name) : ICharacter(), _name(name)
 {
     for (int i = 0 ; i < 4 ; i++)
         this->_inventory[i] = NULL;
-    std::cout << "Parametric constructor of Character " << this->_name << std::endl;
+    std::cout << cyan << "Parametric constructor of Character " << this->_name << reset << std::endl;
 }
 
-Character::Character(Character const &copy) : ICharacter(copy), _name(copy._name)
+Character::Character(Character const &copy) : ICharacter(copy), _name(copy._name + "_copy")
 {
-    std::cout << "Copy constructor of Character " << this->_name << std::endl;
+    std::cout << cyan << "Copy constructor of Character " << this->_name << reset << std::endl;
     for (int i = 0 ; i < 4 ; i++)
     {
         if (copy._inventory[i])
@@ -28,27 +32,34 @@ Character::Character(Character const &copy) : ICharacter(copy), _name(copy._name
 
 Character::~Character() 
 {
-    std::cout << "Destructor of Character" << std::endl;
+    std::cout << red << "Destructor of Character " << this->_name << reset << std::endl;
     for (int i = 0 ; i < 4 ; i++)
     {
         if (this->_inventory[i])
+        {
             delete this->_inventory[i];
+            this->_inventory[i] = NULL;
+        }
     }
 }
 
 Character &Character::operator=(Character const &rhs)
 {
-    std::cout << "Assignement operator of Character" << std::endl;
+    std::cout << cyan << "Assignement operator of Character " << this->_name << reset << std::endl;
     if (this == &rhs)
         return (*this);
     ICharacter::operator=(rhs);
     for (int i = 0 ; i < 4 ; i++)
     {
         if (this->_inventory[i])
+        {
             delete this->_inventory[i];
+            this->_inventory[i] = NULL;
+        }
         if (rhs._inventory[i])
             this->_inventory[i] = rhs._inventory[i]->clone();
     }
+    this->_name = rhs._name;
     return (*this);
 }
 
@@ -59,34 +70,43 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria* m)
 {
+    if (!m)
+    {
+        std::cout << this->_name << " has to equip himself with pure void ?" << std::endl;
+        return ;
+    }
     for (int i = 0 ; i < 4 ; i++)
     {
         if (!this->_inventory[i])
         {
             this->_inventory[i] = m;
-            std::cout << "Now equiped with " << m->getType() << std::endl;
+            std::cout << this->_name << " now equiped with " << m->getType() << std::endl;
             return ;
         }
     }
+    std::cout << this->_name << "'s inventory full ! Sorry not sorry" << std::endl;
 }
 
 void Character::unequip(int idx)
 {
     if (idx >= 0 && idx < 4 && this->_inventory[idx])
     {
-        std::cout << "Now unequiped with " << this->_inventory[idx]->getType() << std::endl;
-        // delete this->_inventory[idx]; //NON enregistrer adresse dans tab dynamique <vector> de AMat
+        std::cout << this->_name << " now unequiped with " << this->_inventory[idx]->getType() << std::endl;
         this->_inventory[idx] = NULL;
     }
+    else
+        std::cout << this->_name << " : Wrong index or no materia here" << std::endl;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
     if (idx >= 0 && idx < 4 && this->_inventory[idx])
     {
-        std::cout << "Using : ";
+        std::cout << this->_name << " using : ";
         this->_inventory[idx]->use(target);
     }
+    else
+        std::cout << this->_name << " : Wrong index or no materia here" << std::endl;
 }
 
 AMateria *Character::returnMateria(int idx)

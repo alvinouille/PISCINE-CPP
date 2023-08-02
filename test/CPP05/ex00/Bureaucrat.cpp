@@ -10,7 +10,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
         throw Bureaucrat::GradeTooHighException();
     else
     {
-        std::cout << "Parametric constructor of Bureaucrat" << std::endl;
+        std::cout << "Parametric constructor of Bureaucrat " << this->_name << " of grade " << grade << std::endl;
         this->_grade = grade;
     }
 }
@@ -52,7 +52,7 @@ void Bureaucrat::upgrading()
 void Bureaucrat::lowgrading()
 {
     std::cout << this->_name << " lowgrading..." << std::endl;
-    if (this->_grade - 1 > 150)
+    if (this->_grade + 1 > 150)
         throw Bureaucrat::GradeTooLowException();
     else
         this->_grade++;

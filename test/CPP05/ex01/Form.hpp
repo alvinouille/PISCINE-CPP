@@ -26,6 +26,7 @@ class Form
 
         std::string getName()const;
         int getSGrade()const;
+        int getEGrade()const;
         bool isSigned()const;
 
         void beSigned(Bureaucrat &b);

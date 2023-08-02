@@ -10,32 +10,35 @@ int main()
 {
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
-    src->learnMateria(new Cure()); 
+    src->learnMateria(new Cure());
 	{
-		std::cout << "<<< TEST EQUIP & USE >>>" << std::endl;
+		std::cout << std::endl << "<<< TEST CREATING A MATERIA, EQUIP & USE >>>" << std::endl << std::endl;
 		ICharacter* me = new Character("me");
 		ICharacter* bob = new Character("bob");
 		AMateria* tmp;
+		tmp = src->createMateria("frites");
+		me->equip(tmp);
 		tmp = src->createMateria("ice");
 		me->equip(tmp);
 		tmp = src->createMateria("cure");
 		me->equip(tmp);
 		me->use(0, *bob);
 		me->use(1, *bob);
-		bob->use(0, *me);
+		me->use(2, *bob);
 		delete bob;
 		delete me;
 	}
 	
 	{
 		std::cout << std::endl << "<<< TEST DEEP COPY AND UNEQUIP >>>" << std::endl << std::endl;
-		Character *you = new Character("new");
+		Character *you = new Character("you");
 		AMateria *tmp1;
 		tmp1 = src->createMateria("cure");
 		you->equip(tmp1);
 		tmp1 = src->createMateria("cure");
 		you->equip(tmp1);
-		Character *copy = new Character(*you);
+		Character *copy = new Character(*you); //deep copy
+		// *copy = *you; //other way to do it
 		std::cout << "Now 'you' has cure(0) and cure(1) and so does 'copy', for example : " << std::endl;
 		you->use(0, *copy);
 		you->use(1, *copy);
@@ -44,7 +47,9 @@ int main()
 
 		AMateria *around;
 		tmp1 = src->createMateria("ice");
-		around = copy->returnMateria(0);
+		around = copy->returnMateria(-10);
+		copy->unequip(-10);
+		around = copy->returnMateria(0); //to avoid leaks
 		copy->unequip(0);
 		if (around)
 			delete around;

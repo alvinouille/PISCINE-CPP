@@ -1,29 +1,33 @@
 #include "AMateria.hpp"
 
+const std::string cyan("\033[1;36m");
+const std::string red("\033[0;31m");
+const std::string reset("\033[0m");
+
 AMateria::AMateria()
 {
-    std::cout << "Default constructor of AMateria" << std::endl;
+    std::cout << cyan << "Default constructor of AMateria" << reset << std::endl;
 }
 
 AMateria::AMateria(std::string const &type) : type(type)
 {
-    std::cout << "Parametric constructor of AMateria" << std::endl;
+    std::cout << cyan << "Parametric constructor of AMateria of type " <<  type << reset << std::endl;
 }
 
 AMateria::AMateria(AMateria const &copy)
 {
-    std::cout << "Copy constructor of AMateria" << std::endl;
+    std::cout << cyan << "Copy constructor of AMateria" << reset << std::endl;
     *this = copy;
 }
 
 AMateria::~AMateria() 
 {
-    std::cout << "Destructor of AMateria" << std::endl;
+    std::cout << red << "Destructor of AMateria of type " << this->type << reset << std::endl;
 }
 
 AMateria &AMateria::operator=(AMateria const &rhs)
 {
-    std::cout << "Assignement operator of AMateria" << std::endl;
+    std::cout << cyan << "Assignement operator of AMateria" << reset << std::endl;
     if (this == &rhs)
         return (*this);
     this->type = rhs.type;

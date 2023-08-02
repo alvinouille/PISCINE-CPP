@@ -11,7 +11,7 @@ Form::Form(std::string name, int const sGrade, int const eGrade) : _name(name), 
     else
     {
         this->_signed = false;
-        std::cout << "Parametric constructor of Form" << std::endl;
+        std::cout << "Parametric constructor of Form [" << name << "]" << std::endl;
     }
 }
 
@@ -19,7 +19,7 @@ Form::~Form() {}
 
 Form::Form(Form const &copy) : _name(copy._name), _signed(copy._signed), _sGrade(copy._sGrade), _eGrade(copy._eGrade)
 {
-    *this = copy;
+    // std::cout << "Copy constructor of Form [" << _name << "]" << std::endl;
 }
 
 Form &Form::operator=(Form const &rhs)
@@ -38,6 +38,11 @@ std::string Form::getName()const
 int Form::getSGrade()const
 {
     return (this->_sGrade);
+}
+
+int Form::getEGrade()const
+{
+    return (this->_eGrade);
 }
 
 bool Form::isSigned()const

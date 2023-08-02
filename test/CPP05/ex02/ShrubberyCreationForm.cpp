@@ -23,6 +23,8 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {}
 void ShrubberyCreationForm::execution()const
 {
     std::ofstream outfile((this->_target + "_shrubbery").c_str());
+    if (!outfile)
+        return ;
     outfile << "             ii " << std::endl;
     outfile << "            o  o" << std::endl;
     outfile << "           o++++o" << std::endl;

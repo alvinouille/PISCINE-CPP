@@ -1,5 +1,5 @@
 NAME	= ScalarConverter
-SRC		= main.cpp ScalarConverter.cpp
+SRC		= main.cpp ScalarConverter.cpp typeConvert.cpp typeType.cpp
 OBJ		= $(SRC:.cpp=.o)
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98

@@ -1,5 +1,5 @@
-NAME	= Span
-SRC		= main.cpp MutantStack.cpp
+NAME	= MutantStack
+SRC		= main.cpp
 OBJ		= $(SRC:.cpp=.o)
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -g3 -std=c++98

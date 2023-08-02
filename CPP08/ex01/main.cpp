@@ -14,13 +14,9 @@ int main()
         std::cout << "Shortest : " << sp.shortestSpan() << std::endl;
         std::cout << "Longest : " << sp.longestSpan() << std::endl;
     }
-    catch(Span::TooManyStockedException &e)
+    catch(std::exception &e)
     {
         std::cerr << e.what() << std::endl;
-    }
-    catch(const Span::NotEnoughStockedException& u)
-    {
-        std::cerr << u.what() << '\n';
     }
 
     try 
@@ -34,13 +30,9 @@ int main()
         std::cout << "Shortest : " << sp2.shortestSpan() << std::endl;
         std::cout << "Longest : " << sp2.longestSpan() << std::endl;
     }
-    catch(Span::TooManyStockedException &e)
+    catch(std::exception &e)
     {
         std::cerr << e.what() << std::endl;
-    }
-    catch(const Span::NotEnoughStockedException& u)
-    {
-        std::cerr << u.what() << '\n';
     }
 
 }

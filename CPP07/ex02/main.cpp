@@ -6,6 +6,7 @@
 #define MAX_VAL 10
 int main(int, char**)
 {
+    Array<int> number;
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));

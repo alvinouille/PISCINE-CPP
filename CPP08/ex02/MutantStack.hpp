@@ -15,11 +15,12 @@ class MutantStack : public std::stack<T>
         MutantStack(MutantStack const &copy) 
         { *this = copy; }
         MutantStack &operator=(MutantStack const &rhs)
-        { return (*this); }
+        { if (*this != rhs) {return (*this);} else {return *this;}}
         ~MutantStack() {}
 
         typedef typename std::deque<T>::iterator iterator;
         typedef typename std::deque<T>::reverse_iterator reverse_iterator;
+
         iterator begin() {return (std::stack<T>::c.begin());}
         iterator end() {return (std::stack<T>::c.end());}
         reverse_iterator rbegin() {return (std::stack<T>::c.rbegin());}

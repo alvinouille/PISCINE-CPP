@@ -6,16 +6,33 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <ctime>
+#include <stdexcept>
 
 class Bitcoin
 {
     public:
+        class badInputE : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
+        class notPositiveE : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
+        class tooLargeE : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
         Bitcoin(const char *input);
         Bitcoin(Bitcoin const &copy);
         ~Bitcoin();
         Bitcoin &operator=(Bitcoin const &rhs);
         void fileToMap();
-        void printMap();
+        void printData();
 
     private:
         char const *_input;
@@ -23,10 +40,10 @@ class Bitcoin
 
         Bitcoin();
 
-        bool formatLine()const;
-        bool formatDate()const;
-        bool formatValue()const;
-        std::string readLine(std::string str)const;
+        std::string formatLine(std::string str)const;
+        std::string formatDate(std::string str)const;
+        float formatValue(std::string str)const;
+        std::map<std::string, float> dbToMap();
 };
 
 #endif

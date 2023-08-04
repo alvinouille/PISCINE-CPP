@@ -2,7 +2,7 @@ NAME	= MutantStack
 SRC		= main.cpp
 OBJ		= $(SRC:.cpp=.o)
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -g3 -std=c++98
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -f
 
 all: $(NAME)

@@ -36,17 +36,21 @@ void Span::addNumber(std::vector <unsigned int> supp)
 
 int Span::shortestSpan()
 {
-    unsigned int minVal;
-    int i = 1;
+    unsigned int minVal = 0;
+    int i = 2;
     std::vector<unsigned int>::iterator it;
     if (stock.size() > 1)
     {
         std::sort(this->stock.begin(), this->stock.end());
+        it = this->stock.begin();
         minVal = this->stock[1] - this->stock[0];
-        for (it = this->stock.begin() ; it != this->stock.end() ; ++it, ++i)
+        ++it;
+        while (++it != this->stock.end())
         {
             if (this->stock[i] - this->stock[i - 1] < minVal)
                 minVal = this->stock[i] - this->stock[i - 1];
+            
+            i++;
         }
         return (minVal);
     }

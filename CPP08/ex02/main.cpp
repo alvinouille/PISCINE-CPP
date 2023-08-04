@@ -48,47 +48,48 @@ int main()
     }
     std::list<int> l(mlist);
 
-    std::cout << std::endl << "<<< MUTANTSTACK REVERSED ITERATIONS >>>" << std::endl;
-    MutantStack<int> mrstack;
-    mrstack.push(5);
-    mrstack.push(17);
-    std::cout << mrstack.top() << std::endl;
-    mrstack.pop();
-    std::cout << mrstack.size() << std::endl;
-    mrstack.push(3);
-    mrstack.push(5);
-    mrstack.push(737);
-    mrstack.push(0);
-    MutantStack<int>::reverse_iterator rit = mrstack.rbegin();
-    MutantStack<int>::reverse_iterator rite = mrstack.rend();
-    ++rit;
-    --rit;
-    while (rit != rite)
-    {
-        std::cout << *rit << std::endl;
-        ++rit;
-    }
+    // std::cout << std::endl << "<<< MUTANTSTACK REVERSED ITERATIONS >>>" << std::endl;
+    // MutantStack<int> mrstack;
+    // mrstack.push(5);
+    // mrstack.push(17);
+    // std::cout << mrstack.top() << std::endl;
+    // mrstack.pop();
+    // std::cout << mrstack.size() << std::endl;
+    // mrstack.push(3);
+    // mrstack.push(5);
+    // mrstack.push(737);
+    // mrstack.push(0);
+    // MutantStack<int>::reverse_iterator rit = mrstack.rbegin();
+    // MutantStack<int>::reverse_iterator rite = mrstack.rend();
+    // ++rit;
+    // --rit;
+    // while (rit != rite)
+    // {
+    //     std::cout << *rit << std::endl;
+    //     ++rit;
+    // }
 
-    std::cout << std::endl << "<<< VECTOR REVERSED ITERATIONS >>>" << std::endl;
-    std::vector<int> mvec;
-    mvec.push_back(5);
-    mvec.push_back(17);
-    std::cout << mvec.back() << std::endl;
-    mvec.pop_back();
-    std::cout << mvec.size() << std::endl;
-    mvec.push_back(3);
-    mvec.push_back(5);
-    mvec.push_back(737);
-    //[...]
-    mvec.push_back(0);
-    std::vector<int>::reverse_iterator ritv = mvec.rbegin();
-    std::vector<int>::reverse_iterator ritve = mvec.rend();
-    ++ritv;
-    --ritv;
-    while (ritv != ritve)
-    {
-        std::cout << *ritv << std::endl;
-        ++ritv;
-    }
+    // std::cout << std::endl << "<<< VECTOR REVERSED ITERATIONS >>>" << std::endl;
+    // std::vector<int> mvec;
+    // mvec.push_back(5);
+    // mvec.push_back(17);
+    // std::cout << mvec.back() << std::endl;
+    // mvec.pop_back();
+    // std::cout << mvec.size() << std::endl;
+    // mvec.push_back(3);
+    // mvec.push_back(5);
+    // mvec.push_back(737);
+    // //[...]
+    // mvec.push_back(0);
+    // std::vector<int>::reverse_iterator ritv = mvec.rbegin();
+    // std::vector<int>::reverse_iterator ritve = mvec.rend();
+    // ++ritv;
+    // --ritv;
+    // while (ritv != ritve)
+    // {
+    //     std::cout << *ritv << std::endl;
+    //     ++ritv;
+    // }
+
     return 0;
 }

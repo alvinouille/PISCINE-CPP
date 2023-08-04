@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#include <cmath>
 
 Bitcoin::Bitcoin(const char *input) : _input(input) {}
 
@@ -82,11 +83,11 @@ std::string Bitcoin::formatDate(std::string str)const
     iss >> year >> delimiter;
     if (year > 2022 || year < 2009 || delimiter != '-')
         throw Bitcoin::badInputE();
-    iss >> day >> delimiter >> month;
+    iss >> month >> delimiter >> day;
     if (month > 12 || month < 1 || !dayCheck(day, month) || delimiter != '-')
         throw Bitcoin::badInputE();
     
-    oss << year << "-" << day << "-" << month;
+    oss << year << "-" << (month < 10 ? "0" : "") << month << "-" << (day < 10 ? "0" : "") << day;
     return (oss.str());
 }
 
@@ -107,6 +108,7 @@ float Bitcoin::formatValue(std::string str)const
 
 void Bitcoin::fileToMap()
 {
+    dbToMap();
     std::ifstream ifs(this->_input);
     if (!ifs.is_open())
     {
@@ -116,6 +118,7 @@ void Bitcoin::fileToMap()
     std::string line, fLine, date;
     float value;
 
+    std::getline(ifs, line);
     while (std::getline(ifs, line))
     {
         try
@@ -123,62 +126,43 @@ void Bitcoin::fileToMap()
             fLine = formatLine(line);
             date = formatDate(fLine);
             value = formatValue(fLine);
-            // std::cout << date << " => " << value << std::endl;
-            this->_map[date] = value;
-            // std::cout << std::endl << "ici" << std::endl;
+            printData(date, value);
         }
         catch(const Bitcoin::badInputE &e)
         {
-            this->_map[std::string(e.what()) + fLine] = -1;
-
+            std::cout << "Error: " << e.what() << line << std::endl;
         }
         catch(const std::exception &e)
         {
-            this->_map[e.what()] = -2;
+            std::cout << "Error: " << e.what() << std::endl;
         }
     }
+    ifs.close();
 }
 
-std::map<std::string, float> Bitcoin::dbToMap()
+void Bitcoin::dbToMap()
 {
     std::ifstream ifs("data.csv");
-    std::map<std::string, float> dbMap;
     std::string line, date;
-    char delimiter;
     float value;
 
     while (std::getline(ifs, line))
     {
+        line.replace(line.find(","), 1, " ");
         std::istringstream iss(line);
-        iss >> date >> delimiter >> value;
-        dbMap[date] = value;
+        iss >> date >> value;
+        this->dbMap[date] = value;
     }
-    return (dbMap);
+    ifs.close();
 }
 
-void Bitcoin::printData()
+void Bitcoin::printData(std::string date, float value)
 {
-    std::map<std::string, float> dbMap = dbToMap();
-    std::map<std::string, float>::iterator _it;
-    std::map<std::string, float>::iterator dit;
-    for (_it = this->_map.begin() ; _it != this->_map.end() ; _it++)
-    {
-        std::cout << _it->first << " => " << _it->second << std::endl;
-        if (_it->second != -1 && _it->second != -2)
-        {
-            // std::cout << " <<< " << _it->first << " | " << _it->second << std::endl;
-            for (dit = dbMap.begin() ; dit != dbMap.end() ; ++dit)
-            {
-                if (_it->first == dit->first)
-                {
-                    std::cout << _it->first << " => " << _it->second << " = " << static_cast<float>(dit->second * _it->second);
-                    break;
-                }
-            }
-            std::cout << _it->first << " not found exact date";
-        }
-        else
-            std::cout << "Error: " << _it->first;
-        std::cout << std::endl;
-    }
+    (void)value;
+    (void)date;
+    std::map<std::string, float>::iterator it = this->dbMap.lower_bound(date);
+    
+    if (it->first != date && it != this->dbMap.begin())
+        --it;
+    std::cout << date << " => " << value << " = " << value * it->second << std::endl;
 }

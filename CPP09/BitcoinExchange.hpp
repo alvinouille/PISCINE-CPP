@@ -31,19 +31,20 @@ class Bitcoin
         Bitcoin(Bitcoin const &copy);
         ~Bitcoin();
         Bitcoin &operator=(Bitcoin const &rhs);
+
         void fileToMap();
-        void printData();
+        void printData(std::string date, float value);
 
     private:
         char const *_input;
-        std::map<std::string, float> _map;
+        std::map<std::string, float> dbMap;
 
         Bitcoin();
 
         std::string formatLine(std::string str)const;
         std::string formatDate(std::string str)const;
         float formatValue(std::string str)const;
-        std::map<std::string, float> dbToMap();
+        void dbToMap();
 };
 
 #endif

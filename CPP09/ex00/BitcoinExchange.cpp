@@ -1,5 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <cmath>
 
 Bitcoin::Bitcoin(const char *input) : _input(input) {}
 

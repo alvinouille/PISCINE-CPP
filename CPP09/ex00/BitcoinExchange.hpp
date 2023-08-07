@@ -44,7 +44,7 @@ class Bitcoin
         std::string formatLine(std::string str)const;
         std::string formatDate(std::string str)const;
         float formatValue(std::string str)const;
-        void dbToMap();
+        int dbToMap();
 };
 
 #endif

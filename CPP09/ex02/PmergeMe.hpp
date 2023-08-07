@@ -7,6 +7,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <deque>
+#include <sstream>
+#include <sys/time.h>
 
 template <typename T>
 class PmergeMe
@@ -72,6 +74,25 @@ class PmergeMe
             else
                 divideToReign(vec);
         }
+
+        void startChrono(std::clock_t begin)
+        {
+            this->_begin = begin;
+        }
+
+        void endChrono(std::clock_t end)
+        {
+            this->_end = end;
+        }
+
+        double resultChrono()const
+        {
+            return (static_cast<double>(this->_end - this->_begin) / static_cast<double>(CLOCKS_PER_SEC) * 1000.0);
+        }
+
+        private:
+            std::clock_t _begin;
+            std::clock_t _end;
 };
 
 #endif

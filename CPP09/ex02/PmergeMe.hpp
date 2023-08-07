@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <deque>
 #include <sstream>
-#include <sys/time.h>
+#include <stdexcept>
 
 # define BEFORE 0
 # define AFTER 1
@@ -23,10 +23,7 @@ class PmergeMe
             {
                 int value = PmergeMe::digitValue(std::string(nb[i]));
                 if (value == -1)
-                {
-                    std::cout << "Error: Wrong input" << std::endl;
-                    return ;
-                }
+                    throw (std::exception());
                 this->_cont.push_back(value);
             }
         }

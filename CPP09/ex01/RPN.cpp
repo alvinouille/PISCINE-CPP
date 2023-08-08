@@ -22,7 +22,12 @@ int doOp(int a, int b, char op)
         case '+':
             return (a + b);
         case '/':
-            return (a / b);
+        {
+            if (b == 0)
+                throw (std::exception());
+            else
+                return (a / b);
+        }
         case '*':
             return (a * b);
         default:
@@ -56,7 +61,14 @@ void RPN::operation(std::string str)
             pile.pop();
             value1 = pile.top();
             pile.pop();
-            pile.push(doOp(value1, value2, token[0]));
+            try
+            {
+                pile.push(doOp(value1, value2, token[0]));
+            }
+            catch(std::exception &e)
+            {
+               return void(std::cout << "Error: division by 0 impossible" << std::endl);
+            }
         }
     }
     if (pile.size() != 1)

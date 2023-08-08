@@ -21,6 +21,8 @@ class PmergeMe
         {
             for (int i = 1 ; i < size ; i++)
             {
+                if (std::string(nb[i]) == "")
+                    throw (std::exception());
                 int value = PmergeMe::digitValue(std::string(nb[i]));
                 if (value == -1)
                     throw (std::exception());

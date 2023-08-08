@@ -83,18 +83,20 @@ static bool dayCheck(int day, int month, int year)
 {
     if (day < 1)
         return (false);
+    if (year == 2009 && month == 1 && day < 2)
+        return (false);
     if (month == 2)
     {
         if (year != 2012 && year != 2016 && year != 2020 && day > 28)
-            return (0);
+            return (false);
         else if (day > 29)
-            return (0);
+            return (false);
     }
     if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31)
-        return (0);
+        return (false);
     if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
-        return (0);
-    return (1);
+        return (false);
+    return (true);
 }
 
 std::string Bitcoin::formatDate(std::string str)const

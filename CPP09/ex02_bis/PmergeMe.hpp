@@ -95,7 +95,7 @@ class PmergeMe
                 if (tab[i].first == value)
                     return tab[i].second;
             }
-            return 0;
+            return -1;
         }
 
         int dichotomicSearch(std::vector<int> tab, int begin, int end, int eC)
@@ -115,66 +115,64 @@ class PmergeMe
             int a, b, toInsert;
             if (flag == 0)
             {
-                for (size_t i = 0 ; i < this->_list.size() ; i += 2)
+                for (size_t i = 0 ; i < this->_list.size(); i += 2)
                 {
                     a = (this->_list[i] > this->_list[i + 1] ? this->_list[i] : this->_list[i + 1]);
                     b = (this->_list[i] > this->_list[i + 1] ? this->_list[i + 1] : this->_list[i]);
+                    if (_list.size() % 2 == 1 && i == this->_list.size() - 1)
+                    {
+                        a = this->_list[i];
+                        b = -1;
+                    }
                     std::pair<int, int> newPair(a, b);
                     newTab.push_back(newPair);
                 }
-                flag = 1;
+                flag++;
             }
             else
             {
-                for (size_t i = 0 ; i < tab.size() - 1 ; i += 2)
+                for (size_t i = 0 ; i < tab.size() ; i += 2)
                 {
                     a = (tab[i].first > tab[i + 1].first ? tab[i].first : tab[i + 1].first);
                     b = (tab[i].first > tab[i + 1].first ? tab[i + 1].first: tab[i].first);
+                    if (tab.size() % 2 == 1 && i == tab.size() - 1)
+                    {
+                        a = tab[i].first;
+                        b = -1;
+                    }
                     std::pair<int, int> newPair(a, b);
                     newTab.push_back(newPair);
                 }
+                flag++;
             }
             if (newTab.size() == 1)
             {
                 this->res.push_back(newTab[0].second);
                 this->res.push_back(newTab[0].first);
-                std::cout << "<<<< " << ij << " >>>>" << std::endl;
-                std::cout << "tab[0] " << newTab[0].first << " - " << newTab[0].second << std::endl;
-                std::cout << "Y chain = ";
-                for (int i = 0 ; i < res.size() ; i++)
-                    std::cout << res[i] << " ";
-                std::cout << std::endl;
-                ij++;
                 return ;
             }
             else
                 fordJohnsonSort(newTab);
-            std::cout << "<<<< " << ij << " >>>>" << std::endl;
-            for (size_t i = 0 ; i < newTab.size(); i++)
-                std::cout << "tab[" << i << "] " << newTab[i].first << " - " << newTab[i].second << std::endl;
+
             this->res.insert(res.begin(), searchingValue(newTab, res[0]));
-            ij++;
-            std::cout << "Y chain before = ";
-            for (int i = 0 ; i < res.size() ; i++)
-                std::cout << res[i] << " ";
-            std::cout << std::endl;
+            int x = res[0];
+
             // for (int i = jacobsthal[ij] ; i >= jacobsthal[ij] - ij ; i--)
             // {
             //     toInsert = searchingValue(newTab, res[i]);
             //     res.insert(res.begin() + dichotomicSearch(this->res, 0, res.size() - 1, toInsert), toInsert);
             //     std::cout << ij << ", jacob = " << jacobsthal[ij] << " -> to insert : " << toInsert << " at " << dichotomicSearch(this->res, 0, res.size() - 1, toInsert) << std::endl;
             // }
-            int j = 0;
-            for (int i = res.size() - 1 ; j < (newTab.size() * 2) - res.size() ; j++, i--)
+
+
+            for (int i = newTab.size() - 1 ; i >= 0 ; i--)
             {
-                toInsert = searchingValue(newTab, res[i]);
+                toInsert = newTab[i].second;
+                if (toInsert == x)
+                    continue;
                 res.insert(res.begin() + dichotomicSearch(this->res, 0, res.size() - 1, toInsert), toInsert);
                 std::cout << "to insert : " << toInsert << " at " << dichotomicSearch(this->res, 0, res.size() - 1, toInsert) << std::endl;
             }
-            std::cout << "Y chain after = ";
-            for (int i = 0 ; i < res.size() ; i++)
-                std::cout << res[i] << " ";
-            std::cout << std::endl;
         }
 
 
